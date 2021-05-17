@@ -1,6 +1,7 @@
 package com.capitole.ecommerce.price.model.brand;
 
 public class Brand {
+    private long id;
     private String name;
 
     public Brand() {
