@@ -27,7 +27,6 @@ public class PricesController {
             @RequestParam("application-date") ZonedDateTime applicationDate,
             @RequestParam("product-id") Integer productId,
             @RequestParam("brand-id") Integer brandId
-
     ) {
         Optional<Price> price = pricesService.getPriceByDateProductAndBrand(applicationDate, productId, brandId);
 
