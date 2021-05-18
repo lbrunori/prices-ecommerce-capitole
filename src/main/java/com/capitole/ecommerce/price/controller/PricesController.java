@@ -29,13 +29,13 @@ public class PricesController {
             @RequestParam("brand-id") Integer brandId
 
     ) {
-        Optional<Price> price = pricesService.getPriceByDateProductAndBrand();
+        Optional<Price> price = pricesService.getPriceByDateProductAndBrand(applicationDate, productId, brandId);
 
         if (!price.isPresent()) {
             throw new NotFoundException("Price was not found for the desired inputs");
         }
 
-        return ResponseEntity.ok(pricesService.getPriceByDateProductAndBrand());
+        return ResponseEntity.ok(price.get());
     }
 
     private boolean isOldDate(ZonedDateTime zonedDateTime) {
