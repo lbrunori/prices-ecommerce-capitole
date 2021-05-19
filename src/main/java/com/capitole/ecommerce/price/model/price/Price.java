@@ -13,7 +13,7 @@ public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "price_list", nullable = false)
-    private int priceList;
+    private long priceList;
     @Column(name = "start_date", nullable = false)
     private final ZonedDateTime startDate = ZonedDateTime.now();
     @Column(name = "end_date", nullable = false)
@@ -21,7 +21,7 @@ public class Price {
     @Column(name = "priority", nullable = false)
     private int priority;
     @Column(name = "product_id", nullable = false)
-    private int product;
+    private long product;
     @Column(name = "price", nullable = true)
     private BigDecimal price;
     @ManyToOne
@@ -40,6 +40,10 @@ public class Price {
     public Price() {
     }
 
+    public long getPriceList() {
+        return priceList;
+    }
+
     public ZonedDateTime getStartDate() {
         return startDate;
     }
@@ -48,12 +52,16 @@ public class Price {
         return endDate;
     }
 
-    public int getPriceList() {
-        return priceList;
-    }
-
     public int getPriority() {
         return priority;
+    }
+
+    public long getProduct() {
+        return product;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
     }
 
     public Brand getBrand() {
@@ -62,13 +70,5 @@ public class Price {
 
     public Currency getCurrency() {
         return currency;
-    }
-
-    public int getProduct() {
-        return product;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
     }
 }

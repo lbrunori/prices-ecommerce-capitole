@@ -23,7 +23,7 @@ public class PricesService implements IPricesService {
 
     @Override
     public Optional<Price> getPriceByDateProductAndBrand(ZonedDateTime date, int brandId, int productId) {
-        List<Price> prices = pricesRepository.findByStartDateAndBrandIdAndProductId(date, brandId, productId);
+        List<Price> prices = pricesRepository.findByStartDateBeforeAndEndDateAfterAndBrandIdAndProduct(date, date, brandId, productId);
 
         return prices.stream()
                 .max(Comparator.comparingInt(Price::getPriority));

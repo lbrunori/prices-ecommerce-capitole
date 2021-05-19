@@ -4,15 +4,18 @@ import com.capitole.ecommerce.price.exception.NotFoundException;
 import com.capitole.ecommerce.price.model.price.Price;
 import com.capitole.ecommerce.price.service.IPricesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-@RestController("/prices")
+@RestController
+@RequestMapping("/api/prices")
 public class PricesController {
 
     private final IPricesService pricesService;
@@ -24,13 +27,14 @@ public class PricesController {
 
     @GetMapping
     public ResponseEntity getPriceByDateProductAndBrand(
-            @RequestParam("application-date") ZonedDateTime applicationDate,
+            @RequestParam("application-date")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime applicationDate,
             @RequestParam("product-id") Integer productId,
             @RequestParam("brand-id") Integer brandId
     ) {
         Optional<Price> price = pricesService.getPriceByDateProductAndBrand(applicationDate, productId, brandId);
 
-        if (!price.isPresent()) {
+        if (price.isEmpty()) {
             throw new NotFoundException("Price was not found for the desired inputs");
         }
 

@@ -6,6 +6,7 @@ import com.capitole.ecommerce.price.service.impl.PricesService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -21,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 public class PricesServiceTest {
 
     @Autowired
@@ -40,7 +42,7 @@ public class PricesServiceTest {
 
     @Test
     public void testOptionalIsEmptyWhenRepositoryResponseIsEmpty() {
-        when(pricesRepository.findByStartDateAndBrandIdAndProductId(any(ZonedDateTime.class), anyInt(), anyInt()))
+        when(pricesRepository.findByStartDateBeforeAndEndDateAfterAndBrandIdAndProduct(any(ZonedDateTime.class), any(ZonedDateTime.class), anyLong(), anyLong()))
                 .thenReturn(Collections.emptyList());
         Optional<Price> price = pricesService.getPriceByDateProductAndBrand(date, productId, brandId);
         assertTrue(price.isEmpty());
@@ -48,7 +50,7 @@ public class PricesServiceTest {
 
     @Test
     public void testOptionalIsNotEmptyWhenThereIsOnePrice() {
-        when(pricesRepository.findByStartDateAndBrandIdAndProductId(any(ZonedDateTime.class), anyInt(), anyInt()))
+        when(pricesRepository.findByStartDateBeforeAndEndDateAfterAndBrandIdAndProduct(any(ZonedDateTime.class), any(ZonedDateTime.class), anyLong(), anyLong()))
                 .thenReturn(Collections.singletonList(new Price()));
         Optional<Price> price = pricesService.getPriceByDateProductAndBrand(date, productId, brandId);
         assertFalse(price.isEmpty());
@@ -64,7 +66,7 @@ public class PricesServiceTest {
         when(priceMock2.getPriority()).thenReturn(2);
         when(priceMock3.getPriority()).thenReturn(3);
 
-        when(pricesRepository.findByStartDateAndBrandIdAndProductId(any(ZonedDateTime.class), anyInt(), anyInt()))
+        when(pricesRepository.findByStartDateBeforeAndEndDateAfterAndBrandIdAndProduct(any(ZonedDateTime.class), any(ZonedDateTime.class), anyLong(), anyLong()))
                 .thenReturn(Arrays.asList(priceMock1, priceMock2, priceMock3));
         Optional<Price> price = pricesService.getPriceByDateProductAndBrand(date, productId, brandId);
 
