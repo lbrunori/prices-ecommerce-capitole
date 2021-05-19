@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface IPricesService {
 
-    Optional<Price> getPriceByDateProductAndBrand(ZonedDateTime date, int brandId, int productId);
+    Optional<Price> getPriceByDateProductAndBrand(ZonedDateTime date, long brandId, long productId);
 }

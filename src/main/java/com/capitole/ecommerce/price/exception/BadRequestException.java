@@ -1,10 +1,10 @@
 package com.capitole.ecommerce.price.exception;
 
-public class NotFoundException extends RuntimeException {
+public class BadRequestException extends RuntimeException {
     private String message;
     private String code;
 
-    public NotFoundException(String code, String message) {
+    public BadRequestException(String code, String message) {
         this.message = message;
         this.code = code;
     }

@@ -15,8 +15,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -39,15 +38,15 @@ public class PricesControllerTest {
 
     @Test
     public void controllerReturnsOneResult() {
-        when(pricesService.getPriceByDateProductAndBrand(any(ZonedDateTime.class), anyInt(), anyInt())).thenReturn(Optional.of(new Price()));
+        when(pricesService.getPriceByDateProductAndBrand(any(ZonedDateTime.class), anyLong(), anyLong())).thenReturn(Optional.of(new Price()));
 
         assertEquals(200, pricesController.getPriceByDateProductAndBrand(date, productId, brandId).getStatusCodeValue());
         assertNotNull(pricesController.getPriceByDateProductAndBrand(date, productId, brandId).getBody());
     }
 
      @Test
-    public void controllerReturnsEmptyRepsonseAndThrowsNotFoundException(){
-         when(pricesService.getPriceByDateProductAndBrand(any(ZonedDateTime.class), anyInt(), anyInt())).thenReturn(Optional.empty());
+    public void controllerReturnsEmptyResponseAndThrowsNotFoundException(){
+         when(pricesService.getPriceByDateProductAndBrand(any(ZonedDateTime.class), anyLong(), anyLong())).thenReturn(Optional.empty());
 
          assertThrows(NotFoundException.class, () -> pricesController.getPriceByDateProductAndBrand(date, productId, brandId));
      }

@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface PricesRepository extends JpaRepository<Price, Long> {
 
-    List<Price> findAll();
+    List<Price> findAllByStartDateBeforeAndEndDateAfterAndBrandIdAndProduct(ZonedDateTime date1, ZonedDateTime date2, long brandId, long productId);
 
-    List<Price> findByStartDateBeforeAndEndDateAfterAndBrandIdAndProduct(ZonedDateTime date1, ZonedDateTime date2, long brandId, long productId);
 }
