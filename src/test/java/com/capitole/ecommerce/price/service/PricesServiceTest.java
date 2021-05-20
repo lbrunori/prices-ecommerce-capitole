@@ -46,7 +46,7 @@ public class PricesServiceTest {
         when(pricesRepository.findAllByStartDateBeforeAndEndDateAfterAndBrandIdAndProduct(any(ZonedDateTime.class), any(ZonedDateTime.class), anyLong(), anyLong()))
                 .thenReturn(Collections.emptyList());
         Optional<Price> price = pricesService.getPriceByDateProductAndBrand(date, productId, brandId);
-        assertTrue(price.isEmpty());
+        assertTrue(!price.isPresent());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class PricesServiceTest {
         when(pricesRepository.findAllByStartDateBeforeAndEndDateAfterAndBrandIdAndProduct(any(ZonedDateTime.class), any(ZonedDateTime.class), anyLong(), anyLong()))
                 .thenReturn(Collections.singletonList(new Price()));
         Optional<Price> price = pricesService.getPriceByDateProductAndBrand(date, productId, brandId);
-        assertFalse(price.isEmpty());
+        assertFalse(!price.isPresent());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class PricesServiceTest {
         verify(priceMock2, times(2)).getPriority();
         verify(priceMock3, times(1)).getPriority();
 
-        assertFalse(price.isEmpty());
+        assertFalse(!price.isPresent());
         assertEquals(3, price.get().getPriority());
 
     }

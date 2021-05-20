@@ -43,7 +43,7 @@ public class PricesController {
 
         Optional<Price> price = pricesService.getPriceByDateProductAndBrand(applicationDate, brandId, productId);
 
-        if (price.isEmpty()) {
+        if (!price.isPresent()) {
             throw new NotFoundException("applicable_price_not_found", "Price was not found for the desired inputs");
         }
 
