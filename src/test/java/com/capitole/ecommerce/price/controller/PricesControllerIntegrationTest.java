@@ -44,4 +44,37 @@ public class PricesControllerIntegrationTest {
         this.mockMvc.perform(get("/api/prices?application-date=2010-06-17T00:00:00Z&product-id=1&brand-id=1")).andDo(print()).andExpect(status().isBadRequest())
                 .andExpect(content().string(containsString("invalid_application_date")));
     }
+
+    @Test
+    public void testBrandZaraAndProduct35455AndDateMay14At10ResultWithOneResult() throws Exception {
+        this.mockMvc.perform(get("/api/prices?application-date=2020-06-14T10:00:00-03:00&product-id=35455&brand-id=1")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"priceList\":1")));
+    }
+
+    @Test
+    public void testBrandZaraAndProduct35455AndDateMay14At16ResultWithOneResult() throws Exception {
+        this.mockMvc.perform(get("/api/prices?application-date=2020-06-14T16:00:00-03:00&product-id=35455&brand-id=1")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"priceList\":2")));
+    }
+
+    @Test
+    public void testBrandZaraAndProduct35455AndDateMay14At21ResultWithOneResult() throws Exception {
+        this.mockMvc.perform(get("/api/prices?application-date=2020-06-14T21:00:00-03:00&product-id=35455&brand-id=1")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"priceList\":1")));
+    }
+
+
+    @Test
+    public void testBrandZaraAndProduct35455AndDateMay15At10ResultWithOneResult() throws Exception {
+        this.mockMvc.perform(get("/api/prices?application-date=2020-06-15T10:00:00-03:00&product-id=35455&brand-id=1")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"priceList\":3")));
+    }
+
+    @Test
+    public void testBrandZaraAndProduct35455AndDateMay21At10ResultWithOneResult() throws Exception {
+        this.mockMvc.perform(get("/api/prices?application-date=2020-06-16T21:00:00-03:00&product-id=35455&brand-id=1")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("\"priceList\":4")));
+    }
+
+
 }

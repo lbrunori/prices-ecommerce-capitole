@@ -18,6 +18,7 @@ public class Price {
     private final ZonedDateTime startDate = ZonedDateTime.now();
     @Column(name = "end_date", nullable = false)
     private final ZonedDateTime endDate = ZonedDateTime.now();
+    /* Value 0 means the minimun priority */
     @Column(name = "priority", nullable = false)
     private int priority;
     @Column(name = "product_id", nullable = false)

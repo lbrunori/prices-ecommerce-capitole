@@ -3,6 +3,7 @@ package com.capitole.ecommerce.price.service;
 import com.capitole.ecommerce.price.model.price.Price;
 import com.capitole.ecommerce.price.repository.PricesRepository;
 import com.capitole.ecommerce.price.service.impl.PricesService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +21,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 public class PricesServiceTest {
 
-    @Autowired
     private PricesService pricesService;
-
-    @MockBean
     private PricesRepository pricesRepository;
 
     private ZonedDateTime date = ZonedDateTime.of( 2021, 5,2,15,33,19, 0, ZoneId.of("America/Argentina/Buenos_Aires"));
     private int productId = 1;
     private int brandId = 1;
+
+    @BeforeEach
+    public void beforeEach() {
+        pricesRepository = Mockito.mock(PricesRepository.class);
+        pricesService = new PricesService(pricesRepository);
+    }
 
     @Test
     public void assertPricesControllerNotNull() {
