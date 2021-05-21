@@ -2,8 +2,6 @@ package com.capitole.ecommerce.price.controller;
 
 import com.capitole.ecommerce.price.exception.BadRequestException;
 import com.capitole.ecommerce.price.exception.NotFoundException;
-import com.capitole.ecommerce.price.model.brand.Brand;
-import com.capitole.ecommerce.price.model.price.Currency;
 import com.capitole.ecommerce.price.model.price.Price;
 import com.capitole.ecommerce.price.service.IPricesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
