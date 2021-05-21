@@ -4,7 +4,6 @@ import com.capitole.ecommerce.price.model.brand.Brand;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.ZonedDateTime;
 
 @Entity

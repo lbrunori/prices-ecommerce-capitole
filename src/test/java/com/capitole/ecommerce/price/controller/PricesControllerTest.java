@@ -4,24 +4,18 @@ import com.capitole.ecommerce.price.exception.NotFoundException;
 import com.capitole.ecommerce.price.model.brand.Brand;
 import com.capitole.ecommerce.price.model.price.Price;
 import com.capitole.ecommerce.price.service.IPricesService;
-import com.capitole.ecommerce.price.service.PricesServiceTest;
 import com.capitole.ecommerce.price.service.impl.PricesService;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 public class PricesControllerTest {
